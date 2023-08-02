@@ -6,6 +6,16 @@ import java.util.Objects;
 
 public class Session {
 
+    public static final Map<String, String> COLUMN_MAPPING = Map.of(
+            "id", "id",
+            "film_id", "filmId",
+            "halls_Id", "hallsId",
+            "start_time", "startTime",
+            "end_time", "endTime",
+            "price", "price"
+
+    );
+
     private int id;
 
     private int filmId;
@@ -17,6 +27,9 @@ public class Session {
     private LocalDateTime endTime;
 
     private int price;
+
+    public Session() {
+    }
 
     public Session(int id, int filmId, int hallsId, LocalDateTime startTime, LocalDateTime endTime, int price) {
         this.id = id;
