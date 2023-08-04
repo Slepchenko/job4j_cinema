@@ -5,7 +5,7 @@ import ru.job4j.cinema.model.Film;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface Films {
+public interface FilmRepository {
 
    Optional<Film> findById(int id);
 
