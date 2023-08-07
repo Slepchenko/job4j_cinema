@@ -5,13 +5,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.job4j.cinema.repository.FilmRepository;
-import ru.job4j.cinema.repository.MemoryFilmsRepository;
+import ru.job4j.cinema.repository.MemoryFilmRepository;
 
 @Controller
-@RequestMapping("/Films")
+@RequestMapping("/films")
 public class FilmController {
 
-    private final FilmRepository filmRepository = new MemoryFilmsRepository();
+    private final FilmRepository filmRepository = new MemoryFilmRepository();
 
     @GetMapping
     public String getAll(Model model) {

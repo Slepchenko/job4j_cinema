@@ -20,7 +20,7 @@ public class Session {
 
     private int filmId;
 
-    private int hallsId;
+    private int hallId;
 
     private LocalDateTime startTime;
 
@@ -34,7 +34,7 @@ public class Session {
     public Session(int id, int filmId, int hallsId, LocalDateTime startTime, LocalDateTime endTime, int price) {
         this.id = id;
         this.filmId = filmId;
-        this.hallsId = hallsId;
+        this.hallId = hallsId;
         this.startTime = startTime;
         this.endTime = endTime;
         this.price = price;
@@ -56,12 +56,12 @@ public class Session {
         this.filmId = filmId;
     }
 
-    public int getHallsId() {
-        return hallsId;
+    public int getHallId() {
+        return hallId;
     }
 
-    public void setHallsId(int hallsId) {
-        this.hallsId = hallsId;
+    public void setHallId(int hallId) {
+        this.hallId = hallId;
     }
 
     public LocalDateTime getStartTime() {
