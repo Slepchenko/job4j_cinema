@@ -14,7 +14,7 @@
             integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
             crossorigin="anonymous"></script>
 
-    <title>Cinema</title>
+    <title>Залы</title>
 </head>
 <body>
 <div class="container-fluid p-0">
@@ -24,9 +24,9 @@
             <div class="Collapse navbar-collapse">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="/">Главная</a>
-                    <a class="nav-item nav-link active" th:href="@{/films}">Кинотека</a>
+                    <a class="nav-item nav-link" th:href="@{/films}">Кинотека</a>
                     <a class="nav-item nav-link" th:href="@{/filmSessions}">Расписание</a>
-                    <a class="nav-item nav-link" th:href="@{/halls}">Залы</a>
+                    <a class="nav-item nav-link active" th:href="@{/halls}">Залы</a>
                 </div>
             </div>
         </div>
@@ -37,26 +37,19 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Название</th>
-                    <th scope="col">Сюжет</th>
-                    <th scope="col">Год релиза</th>
-                    <th scope="col">Жанр</th>
-                    <th scope="col">Ограничение по возрасту</th>
-                    <th scope="col">Продолжительность</th>
-
+                    <th scope="col">Название зала</th>
+                    <th scope="col">Количество рядов</th>
+                    <th scope="col">Количество мест</th>
+                    <th scope="col">Описание</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="film: ${films}">
-                    <td th:text="${film.fileId}"/>
-                    <td th:text="${film.id}"/>
-                    <td th:text="${film.name}"/>
-                    <td th:text="${film.description}"/>
-                    <td th:text="${film.year}"/>
-                    <td th:text="${film.genreId}"/>
-                    <td th:text="${film.minimalAge}"/>
-                    <td th:text="${film.duration}"/>
-                    <td th:text="${film.fileId}"/>
+                <tr th:each="hall: ${halls}">
+                    <td th:text="${hall.id}"/>
+                    <td th:text="${hall.name}"/>
+                    <td th:text="${hall.rowCount}"/>
+                    <td th:text="${hall.placeCount}"/>
+                    <td th:text="${hall.description}"/>
                 </tr>
                 </tbody>
             </table>
