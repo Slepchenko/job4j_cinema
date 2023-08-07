@@ -1,0 +1,15 @@
+<div th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Job4jCinema</a>
+            <div class="Collapse navbar-collapse">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="/">Главная</a>
+                    <a class="nav-item nav-link active" th:href="@{/films}">Кинотека</a>
+                    <a class="nav-item nav-link active" th:href="@{/filmSessions}">Расписание</a>
+                    <a class="nav-item nav-link active" th:href="@{/halls}">Залы</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
