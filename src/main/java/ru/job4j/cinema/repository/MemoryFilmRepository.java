@@ -8,17 +8,16 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MemoryFilmsRepository implements FilmRepository {
+public class MemoryFilmRepository implements FilmRepository {
 
-    private AtomicInteger nextId = new AtomicInteger(1);
+    private final AtomicInteger nextId = new AtomicInteger(0);
 
     private final Map<Integer, Film> films = new HashMap<>();
 
-    public MemoryFilmsRepository() {
+    public MemoryFilmRepository() {
         add(new Film(0, "good, bad, agly", "the best of the wild west", 1965, 3, 16, 145, 1));
         add(new Film(0, "film2", "desc2", 2008, 1, 18, 120, 2));
         add(new Film(0, "film3", "desc3", 2021, 2, 12, 90, 1));
-
     }
 
     @Override
