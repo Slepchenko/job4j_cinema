@@ -4,18 +4,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.job4j.cinema.repository.HallRepository;
-import ru.job4j.cinema.repository.MemoryHallRepository;
+import ru.job4j.cinema.service.HallService;
 
 @Controller
 @RequestMapping("/halls")
 public class HallController {
 
-    private final HallRepository hallRepository = new MemoryHallRepository();
+    private final HallService hallService;
+
+    public HallController(HallService hallService) {
+        this.hallService = hallService;
+    }
 
     @GetMapping
     public String getAll(Model model) {
-        model.addAttribute("halls", hallRepository.findAll());
+        model.addAttribute("halls", hallService.findAll());
         return "halls/list";
     }
 }

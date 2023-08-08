@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Objects;
 
-public class Session {
+public class FilmSession {
 
     public static final Map<String, String> COLUMN_MAPPING = Map.of(
             "id", "id",
@@ -28,10 +28,10 @@ public class Session {
 
     private int price;
 
-    public Session() {
+    public FilmSession() {
     }
 
-    public Session(int id, int filmId, int hallsId, LocalDateTime startTime, LocalDateTime endTime, int price) {
+    public FilmSession(int id, int filmId, int hallsId, LocalDateTime startTime, LocalDateTime endTime, int price) {
         this.id = id;
         this.filmId = filmId;
         this.hallId = hallsId;
@@ -96,7 +96,7 @@ public class Session {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Session session = (Session) o;
+        FilmSession session = (FilmSession) o;
         return id == session.id;
     }
 
