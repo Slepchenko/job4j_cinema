@@ -1,6 +1,6 @@
 package ru.job4j.cinema.repository;
 
-import ru.job4j.cinema.model.Session;
+import ru.job4j.cinema.model.FilmSession;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -14,7 +14,7 @@ public class MemoryFilmSessionRepository implements FilmSessionRepository {
 
     private final AtomicInteger nextId = new AtomicInteger(0);
 
-    private final Map<Integer, Session> sessions = new HashMap<>();
+    private final Map<Integer, FilmSession> filmSessions = new HashMap<>();
 
     public MemoryFilmSessionRepository() {
         LocalDateTime startTime1 = LocalDateTime.of(2023, Month.AUGUST, 1, 14, 0, 0);
@@ -25,24 +25,24 @@ public class MemoryFilmSessionRepository implements FilmSessionRepository {
         LocalDateTime finishTime3 = LocalDateTime.of(2023, Month.AUGUST, 25, 21, 0, 0);
         FilmRepository filmRepository = new MemoryFilmRepository();
         HallRepository hallRepository = new MemoryHallRepository();
-        add(new Session(0, filmRepository.findById(1).get().getId(), hallRepository.findById(1).get().getId(), startTime1, finishTime1, 100));
-        add(new Session(0, filmRepository.findById(2).get().getId(), hallRepository.findById(2).get().getId(), startTime2, finishTime2, 55));
-        add(new Session(0, filmRepository.findById(3).get().getId(), hallRepository.findById(3).get().getId(), startTime3, finishTime3, 150));
+        add(new FilmSession(0, filmRepository.findById(1).get().getId(), hallRepository.findById(1).get().getId(), startTime1, finishTime1, 100));
+        add(new FilmSession(0, filmRepository.findById(2).get().getId(), hallRepository.findById(2).get().getId(), startTime2, finishTime2, 55));
+        add(new FilmSession(0, filmRepository.findById(3).get().getId(), hallRepository.findById(3).get().getId(), startTime3, finishTime3, 150));
     }
 
     @Override
-    public Optional<Session> findById(int id) {
-        return Optional.ofNullable(sessions.get(id));
+    public Optional<FilmSession> findById(int id) {
+        return Optional.ofNullable(filmSessions.get(id));
     }
 
     @Override
-    public Collection<Session> findAll() {
-        return sessions.values();
+    public Collection<FilmSession> findAll() {
+        return filmSessions.values();
     }
 
-    private void add(Session session) {
-        session.setId(nextId.incrementAndGet());
-        sessions.put(session.getId(), session);
+    private void add(FilmSession filmSession) {
+        filmSession.setId(nextId.incrementAndGet());
+        filmSessions.put(filmSession.getId(), filmSession);
     }
 
 }
