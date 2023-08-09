@@ -1,23 +1,19 @@
 package ru.job4j.cinema.service;
 
+import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.repository.FilmRepository;
-import ru.job4j.cinema.repository.MemoryFilmRepository;
 
 import java.util.Collection;
 import java.util.Optional;
 
+@Service
 public class SimpleFilmService implements FilmService {
 
-    private static final SimpleFilmService INSTANCE = new SimpleFilmService();
+    private final FilmRepository filmRepository;
 
-    private final FilmRepository filmRepository = new MemoryFilmRepository();
-
-    private SimpleFilmService() {
-    }
-
-    public static SimpleFilmService getInstance() {
-        return INSTANCE;
+    public SimpleFilmService(FilmRepository filmRepository) {
+        this.filmRepository = filmRepository;
     }
 
     @Override

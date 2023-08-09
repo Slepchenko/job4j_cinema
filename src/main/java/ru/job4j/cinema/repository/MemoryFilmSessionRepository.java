@@ -1,5 +1,6 @@
 package ru.job4j.cinema.repository;
 
+import org.springframework.stereotype.Repository;
 import ru.job4j.cinema.model.FilmSession;
 
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Repository
 public class MemoryFilmSessionRepository implements FilmSessionRepository {
 
     private final AtomicInteger nextId = new AtomicInteger(0);

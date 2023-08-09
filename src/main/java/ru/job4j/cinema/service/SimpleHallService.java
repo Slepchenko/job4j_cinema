@@ -1,23 +1,20 @@
 package ru.job4j.cinema.service;
 
+import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.Hall;
 import ru.job4j.cinema.repository.HallRepository;
-import ru.job4j.cinema.repository.MemoryHallRepository;
 
 import java.util.Collection;
 import java.util.Optional;
 
+@Service
 public class SimpleHallService implements HallService {
 
-    private static final SimpleHallService INSTANCE = new SimpleHallService();
 
-    private final HallRepository hallRepository = new MemoryHallRepository();
+    private final HallRepository hallRepository;
 
-    private SimpleHallService() {
-    }
-
-    public static SimpleHallService getInstance() {
-        return INSTANCE;
+    public SimpleHallService(HallRepository hallRepository) {
+        this.hallRepository = hallRepository;
     }
 
     @Override

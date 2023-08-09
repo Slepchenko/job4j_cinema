@@ -1,6 +1,6 @@
 package ru.job4j.cinema.repository;
 
-import ru.job4j.cinema.model.Film;
+import org.springframework.stereotype.Repository;
 import ru.job4j.cinema.model.Hall;
 
 import java.util.Collection;
@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Repository
 public class MemoryHallRepository implements HallRepository {
 
     private final AtomicInteger nextId = new AtomicInteger(0);

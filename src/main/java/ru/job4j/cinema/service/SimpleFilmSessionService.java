@@ -1,5 +1,6 @@
 package ru.job4j.cinema.service;
 
+import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.FilmSession;
 import ru.job4j.cinema.repository.FilmSessionRepository;
 import ru.job4j.cinema.repository.MemoryFilmSessionRepository;
@@ -7,17 +8,13 @@ import ru.job4j.cinema.repository.MemoryFilmSessionRepository;
 import java.util.Collection;
 import java.util.Optional;
 
+@Service
 public class SimpleFilmSessionService implements FilmSessionService {
 
-    private static final SimpleFilmSessionService INSTANCE = new SimpleFilmSessionService();
+    private final FilmSessionRepository memoryFilmSessionRepository;
 
-    private final FilmSessionRepository memoryFilmSessionRepository = new MemoryFilmSessionRepository();
-
-    private SimpleFilmSessionService() {
-    }
-
-    public static SimpleFilmSessionService getInstance() {
-        return INSTANCE;
+    private SimpleFilmSessionService(MemoryFilmSessionRepository memoryFilmSessionRepository) {
+        this.memoryFilmSessionRepository = memoryFilmSessionRepository;
     }
 
     @Override
