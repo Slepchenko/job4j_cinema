@@ -29,17 +29,16 @@
                     <th scope="col">Начало сеанса</th>
                     <th scope="col">Конец сеанса</th>
                     <th scope="col">Цена</th>
-
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="filmSession: ${filmSessions}">
-                    <td th:text="${filmSession.id}"/>
-                    <td th:text="${filmSession.filmId}"/>
-                    <td th:text="${filmSession.hallId}"/>
-                    <td th:text="${filmSession.startTime}"/>
-                    <td th:text="${filmSession.endTime}"/>
-                    <td th:text="${filmSession.price}"/>
+                    <td th:text="${filmSession.id}"></td>
+                    <td><a th:text="${filmSession.filmId}" th:href="@{/filmSessions/{filmSessionId}(filmSessionId=${filmSession.id})}"></a></td>
+                    <td th:text="${filmSession.hallId}"></td>
+                    <td th:text="${filmSession.startTime}"></td>
+                    <td th:text="${filmSession.endTime}"></td>
+                    <td th:text="${filmSession.price}"></td>
                 </tr>
                 </tbody>
             </table>

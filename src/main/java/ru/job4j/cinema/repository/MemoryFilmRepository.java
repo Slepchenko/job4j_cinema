@@ -17,7 +17,7 @@ public class MemoryFilmRepository implements FilmRepository {
     private final Map<Integer, Film> films = new HashMap<>();
 
     public MemoryFilmRepository() {
-        add(new Film(0, "good, bad, agly", "the best of the wild west", 1965, 3, 16, 145, 1));
+        add(new Film(0, "film1", "desc1", 1965, 3, 16, 145, 1));
         add(new Film(0, "film2", "desc2", 2008, 1, 18, 120, 2));
         add(new Film(0, "film3", "desc3", 2021, 2, 12, 90, 1));
     }
