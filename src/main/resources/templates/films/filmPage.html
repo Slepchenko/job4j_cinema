@@ -18,7 +18,22 @@
 <body>
 <div class="container-fluid p-0">
     <header th:insert="blocks/header :: header"></header>
+
     <div class="container">
+        <img th:src="@{${poster}}" class="w-60" alt="No image"/>
+<!--        <img th:src="@{/film2.png}" class="w-60" alt="No image"/>-->
+        <td th:text="${poster}"></td>
+        <ul>
+            <h1><b>
+                <td th:text="${film.name}">
+            </b></h1>
+
+            <td th:text="${genre}"></td>
+            <br><td th:text="${film.minimalAge}"></td>+
+            <br><td th:text="${film.duration}"></td> минут
+            <hr>
+            <td th:text="${film.description}"></td>
+        </ul>
 
     </div>
     <footer th:insert="blocks/footer :: footer"></footer>
