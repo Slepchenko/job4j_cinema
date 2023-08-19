@@ -14,7 +14,7 @@ public class FilmSessionController {
     private final FilmSessionService filmSessionService;
 
     public FilmSessionController(FilmSessionService filmSessionService) {
-        this.filmSessionService =filmSessionService;
+        this.filmSessionService = filmSessionService;
     }
 
     @GetMapping
