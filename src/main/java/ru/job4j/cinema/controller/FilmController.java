@@ -32,14 +32,14 @@ public class FilmController {
     @GetMapping("/{id}")
     public String getById(Model model, @PathVariable int id) {
         var filmOptional = filmService.findById(id);
-        var genreOptional = genreService.findById(filmOptional.get().getId());
+        var genreOptional = genreService.findById(filmOptional.get().getGenreId());
         if (filmOptional.isEmpty()) {
             model.addAttribute("message", "Фильм не найден");
             return "errors/404";
         }
         model.addAttribute("film", filmOptional.get());
         model.addAttribute("genre", genreOptional.get().getName());
-        model.addAttribute("poster", posterService.getFileById(id).get().getPath());
+        model.addAttribute("poster", posterService.getFileById(filmOptional.get().getFileId()).get().getPath());
         return "films/filmPage";
     }
 

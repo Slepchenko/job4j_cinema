@@ -12,8 +12,8 @@ public class SimpleGenreService implements GenreService {
 
     private final GenreRepository genreRepository;
 
-    public SimpleGenreService(GenreRepository genreRepository) {
-        this.genreRepository = genreRepository;
+    public SimpleGenreService(GenreRepository sql2oGenreRepository) {
+        this.genreRepository = sql2oGenreRepository;
     }
 
     @Override

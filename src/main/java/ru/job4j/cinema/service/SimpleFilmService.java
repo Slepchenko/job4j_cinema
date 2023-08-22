@@ -12,8 +12,8 @@ public class SimpleFilmService implements FilmService {
 
     private final FilmRepository filmRepository;
 
-    public SimpleFilmService(FilmRepository filmRepository) {
-        this.filmRepository = filmRepository;
+    public SimpleFilmService(FilmRepository sql2oFilmRepository) {
+        this.filmRepository = sql2oFilmRepository;
     }
 
     @Override

@@ -59,3 +59,14 @@ create table tickets
     user_id      int                               not null,
     unique (session_id, row_number, place_number)
 );
+
+create table posters
+(
+    id   serial primary key,
+    name varchar not null,
+    path varchar not null unique
+)
+
+insert into posters(name, path) values('film1', '/film1.png');
+insert into posters(name, path) values('film2', '/film2.png');
+insert into posters(name, path) values('film3', '/film3.png');

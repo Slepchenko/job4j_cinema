@@ -12,8 +12,8 @@ public class SimpleHallService implements HallService {
 
     private final HallRepository hallRepository;
 
-    public SimpleHallService(HallRepository hallRepository) {
-        this.hallRepository = hallRepository;
+    public SimpleHallService(HallRepository sql2oHallRepository) {
+        this.hallRepository = sql2oHallRepository;
     }
 
     @Override
