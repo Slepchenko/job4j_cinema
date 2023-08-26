@@ -22,7 +22,6 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Название</th>
                     <th scope="col">Жанр</th>
                     <th scope="col">Ограничение по возрасту</th>
@@ -30,13 +29,8 @@
                 </thead>
                 <tbody>
                 <tr th:each="film: ${films}">
-                    <td th:text="${film.id}"></td>
                     <td><a th:text="${film.name}" th:href="@{/films/{filmId}(filmId=${film.id})}"></a></td>
-                    <td th:text="${film.genreId}"></td>
                     <td th:text="${film.minimalAge}"></td>
-                </tr>
-                </tbody>
-            </table>
         </div>
     </div>
     <footer th:insert="blocks/footer :: footer"></footer>

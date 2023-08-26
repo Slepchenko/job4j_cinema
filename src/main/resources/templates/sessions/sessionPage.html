@@ -19,7 +19,29 @@
 <div class="container-fluid p-0">
     <header th:insert="blocks/header :: header"></header>
     <div class="container">
+        <div class="row">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Зал</th>
+                    <th scope="col">Начало сеанса</th>
+                    <th scope="col">Конец сеанса</th>
+                    <th scope="col">Цена</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="filmSession: ${filmSessions}">
+                    <td th:text="${film}"></td>
+                    <td th:text="${hall}"></td>
+                    <td th:text="${filmSession.startTime}"></td>
+                    <td th:text="${filmSession.endTime}"></td>
+                    <td th:text="${filmSession.price}"></td>
+                </tr>
+                </tbody>
 
+            </table>
+        </div>
     </div>
     <footer th:insert="blocks/footer :: footer"></footer>
 </div>

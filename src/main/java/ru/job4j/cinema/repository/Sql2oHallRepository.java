@@ -31,7 +31,6 @@ public class Sql2oHallRepository implements HallRepository {
         try (var connection = sql2o.open()) {
             var query = connection.createQuery("SELECT * FROM halls");
             return query.setColumnMappings(Hall.COLUMN_MAPPING).executeAndFetch(Hall.class);
-//            return query.executeAndFetch(Hall.class);
         }
     }
 
