@@ -33,18 +33,16 @@
             <h1><b>
                 <td th:text="${film.name}">
             </b></h1>
-
             <td th:text="${genre}"></td>
             <br>
-            <td th:text="${film.minimalAge}"></td>
-            +
+            <td th:text="${film.minimalAge}"></td> +
             <br>
-            <td th:text="${film.duration}"></td>
-            минут
+            <td th:text="${film.duration}"></td> минут
             <hr>
             <td th:text="${film.description}"></td>
+            <hr>
+            <div class="col-2"><a class="btn btn-light w-100" th:href="@{/tickets}">Купить билет</a></div>
         </ul>
-
     </div>
     <footer th:insert="blocks/footer :: footer"></footer>
 </div>

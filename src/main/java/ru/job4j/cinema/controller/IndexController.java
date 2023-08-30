@@ -1,5 +1,6 @@
 package ru.job4j.cinema.controller;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,7 @@ import ru.job4j.cinema.model.User;
 
 import javax.servlet.http.HttpSession;
 
+@ThreadSafe
 @Controller
 public class IndexController {
 

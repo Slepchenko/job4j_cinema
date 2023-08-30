@@ -30,7 +30,6 @@ public class Sql2oFilmSessionRepository implements FilmSessionRepository {
     public Collection<FilmSession> findAll() {
         try (var connection = sql2o.open()) {
             var query = connection.createQuery("SELECT * FROM film_sessions");
-//            var query = connection.createQuery("select fs.film_id, h.name as hall, fs.start_time, fs.end_time, price from film_sessions fs join halls h on fs.halls_id = h.id;");
             return query.setColumnMappings(FilmSession.COLUMN_MAPPING).executeAndFetch(FilmSession.class);
         }
     }
