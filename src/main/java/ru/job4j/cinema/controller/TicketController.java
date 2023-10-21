@@ -3,14 +3,17 @@ package ru.job4j.cinema.controller;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
+import ru.job4j.cinema.service.FilmService;
 import ru.job4j.cinema.service.FilmSessionService;
+import ru.job4j.cinema.service.HallService;
 import ru.job4j.cinema.service.TicketService;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @ThreadSafe
 @Controller
@@ -19,34 +22,68 @@ public class TicketController {
 
     private final TicketService ticketService;
 
+    private final FilmService filmService;
+
     private final FilmSessionService filmSessionService;
 
-    public TicketController(TicketService ticketService, FilmSessionService filmSessionService) {
+    private final HallService hallService;
+
+
+    public TicketController(TicketService ticketService, FilmService filmService, FilmSessionService filmSessionService, HallService hallService) {
         this.ticketService = ticketService;
+        this.filmService = filmService;
         this.filmSessionService = filmSessionService;
+        this.hallService = hallService;
     }
 
-    @GetMapping
-    public String getAll(Model model, HttpSession session) {
+    @GetMapping("{id}")
+    public String getCreationPage(Model model, @PathVariable int id, HttpSession session) {
         checkInMenu(model, session);
-        model.addAttribute("tickets", ticketService.findAll());
-        model.addAttribute("filmSessions", filmSessionService.findAll());
-        return "tickets/buyTicket";
-    }
-
-    @GetMapping("/")
-    public String getById(Model model, @PathVariable int id, HttpSession session) {
-        checkInMenu(model, session);
-        var ticketOptional = ticketService.findById(id);
-        if (ticketOptional.isEmpty()) {
-            model.addAttribute("message", "Билет не найден");
+        var filmSessionOption = filmSessionService.findById(id);
+        var filmOption = filmService.findById(filmSessionOption.get().getFilmId());
+        var hallOption = hallService.findById(filmSessionOption.get().getHallId());
+        if (filmSessionOption.isEmpty()) {
+            model.addAttribute("message", "Фильм не найден");
             return "errors/404";
         }
-        model.addAttribute("tickets", ticketOptional.get());
-        return "tickets/buyTicket";
+        model.addAttribute("filmSession", filmSessionOption.get());
+        model.addAttribute("film", filmOption.get().getName());
+        model.addAttribute("hall", hallOption.get().getName());
+        model.addAttribute("rows", getRows(hallOption.get().getRowCount()));
+        model.addAttribute("places", getPlaces(hallOption.get().getPlaceCount()));
+        return "/tickets/create";
     }
 
-    private void checkInMenu(Model model,  HttpSession session) {
+    @PostMapping("/create")
+    public String saveTicket(Model model, @ModelAttribute Ticket ticket) {
+        try {
+            var ticketOption = ticketService.save(ticket);
+            model.addAttribute("message", "Билет куплен");
+            return "/tickets/buySuccessfully";
+        } catch (Exception e){
+            model.addAttribute("message", "Не удалось приобрести билет на заданное место."
+                    + " Вероятно оно уже занято. Перейдите на страницу бронирования билетов и попробуйте снова.");
+            return "errors/404";
+        }
+    }
+
+    private List<Integer> getRows(int rows) {
+        List<Integer> rowsList = new ArrayList<>();
+        for (int i = 1; i <= rows; i++) {
+            rowsList.add(i);
+        }
+        return rowsList;
+    }
+
+    private List<Integer> getPlaces(int places) {
+        List<Integer> placesList = new ArrayList<>();
+        for (int i = 1; i <= places; i++) {
+            placesList.add(i);
+        }
+        return placesList;
+    }
+
+    private void checkInMenu(Model model, HttpSession session) {
         var user = (User) session.getAttribute("user");
         if (user == null) {
             user = new User();

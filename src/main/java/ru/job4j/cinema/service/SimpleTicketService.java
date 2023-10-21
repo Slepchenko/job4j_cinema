@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.repository.TicketRepository;
 
-import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -17,13 +16,8 @@ public class SimpleTicketService implements TicketService {
     }
 
     @Override
-    public Ticket save(Ticket ticket) {
+    public Optional<Ticket> save(Ticket ticket) {
         return ticketRepository.save(ticket);
-    }
-
-    @Override
-    public Collection<Ticket> findAll() {
-        return ticketRepository.findAll();
     }
 
     @Override

@@ -3,9 +3,8 @@ package ru.job4j.cinema.controller;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.service.FilmService;
 import ru.job4j.cinema.service.FilmSessionService;
@@ -48,10 +47,26 @@ public class FilmSessionController {
             model.addAttribute("message", "Фильм не найден");
             return "errors/404";
         }
-        model.addAttribute("filmSessions", filmSessionOption.get());
+        model.addAttribute("filmSession", filmSessionOption.get());
         model.addAttribute("film", filmOption.get().getName());
         model.addAttribute("hall", hallOption.get().getName());
         return "sessions/sessionPage";
+    }
+
+    @GetMapping("/create")
+    public String getCreationTicketPage(Model model, @PathVariable int id, HttpSession session) {
+        checkInMenu(model, session);
+        model.addAttribute("filmSessions", filmSessionService.findAll());
+        model.addAttribute("films", filmService.findAll());
+        return "/tickets/create";
+    }
+
+    @PostMapping({"/create", "/{id}"})
+    public String createTicket(Model model, @ModelAttribute Ticket ticket) {
+        var filmOption = filmService.findById(0);
+        model.addAttribute("films", filmService.findAll());
+        model.addAttribute("move", filmOption.get());
+        return "/tickets/create";
     }
 
     private void checkInMenu(Model model,  HttpSession session) {

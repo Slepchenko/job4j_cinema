@@ -45,8 +45,7 @@
                     <td th:text="${filmSession.id}"></td>
                     <td><a th:text="${filmSession.filmId}"
                            th:href="@{/filmSessions/{filmSessionId}(filmSessionId=${filmSession.id})}"></a></td>
-                    <td th:each="hall : ${halls}" th:if="${hall.id == filmSession.hallId}" th:text="${hall.name}">
-                    </td>
+                    <td th:each="hall : ${halls}" th:if="${hall.id == filmSession.hallId}" th:text="${hall.name}"></td>
                     <td th:text="${filmSession.startTime}"></td>
                     <td th:text="${filmSession.endTime}"></td>
                     <td th:text="${filmSession.price}"></td>

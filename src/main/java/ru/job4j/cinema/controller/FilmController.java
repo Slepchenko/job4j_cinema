@@ -3,9 +3,7 @@ package ru.job4j.cinema.controller;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.service.*;
 
@@ -22,10 +20,13 @@ public class FilmController {
 
     private final PosterService posterService;
 
-    public FilmController(FilmService filmService, GenreService genreService, PosterService posterService) {
+    private final FilmSessionService filmSessionService;
+
+    public FilmController(FilmService filmService, GenreService genreService, PosterService posterService, FilmSessionService filmSessionService) {
         this.filmService = filmService;
         this.genreService = genreService;
         this.posterService = posterService;
+        this.filmSessionService = filmSessionService;
     }
 
     @GetMapping
@@ -48,6 +49,7 @@ public class FilmController {
         model.addAttribute("film", filmOptional.get());
         model.addAttribute("genre", genreOptional.get().getName());
         model.addAttribute("poster", posterService.getFileById(filmOptional.get().getFileId()).get().getPath());
+        model.addAttribute("filmSessions", filmSessionService.findAll());
         return "films/filmPage";
     }
 

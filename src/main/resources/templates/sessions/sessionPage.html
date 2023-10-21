@@ -17,15 +17,15 @@
 <body>
 <div class="container-fluid p-0">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <header th:insert="blocks/header :: header"></header>
-    <div class="d-flex" th:if="${user.name == 'Гость'}">
-        <a class="nav-link text-secondary me-3" th:href="@{/users/register}">Регистрация</a>
-        <a class="nav-link text-secondary" th:href="@{/users/login}">Войти</a>
-    </div>
-    <div class="d-flex" th:if="${user.name != 'Гость'}">
-        <a class="nav-link text-secondary me-3" href="#" th:text="${user.name}"></a>
-        <a class="nav-link text-secondary" th:href="@{/users/logout}">Выйти</a>
-    </div>
+        <header th:insert="blocks/header :: header"></header>
+        <div class="d-flex" th:if="${user.name == 'Гость'}">
+            <a class="nav-link text-secondary me-3" th:href="@{/users/register}">Регистрация</a>
+            <a class="nav-link text-secondary" th:href="@{/users/login}">Войти</a>
+        </div>
+        <div class="d-flex" th:if="${user.name != 'Гость'}">
+            <a class="nav-link text-secondary me-3" href="#" th:text="${user.name}"></a>
+            <a class="nav-link text-secondary" th:href="@{/users/logout}">Выйти</a>
+        </div>
     </nav>
     <div class="container">
         <div class="row">
@@ -40,18 +40,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="filmSession: ${filmSessions}">
                     <td th:text="${film}"></td>
                     <td th:text="${hall}"></td>
                     <td th:text="${filmSession.startTime}"></td>
                     <td th:text="${filmSession.endTime}"></td>
                     <td th:text="${filmSession.price}"></td>
-                </tr>
+
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tbody>
             </table>
-            <div class="col-2"><a class="btn btn-light w-100" th:href="@{/tickets}">Купить билет</a></div>
+            <div class="col-4"><a class="btn btn-light w-100" th:href="@{/tickets/{filmSessionId}(filmSessionId=${filmSession.id})}">купить билет</a></div>
         </div>
     </div>
+
     <footer th:insert="blocks/footer :: footer"></footer>
 </div>
 </body>

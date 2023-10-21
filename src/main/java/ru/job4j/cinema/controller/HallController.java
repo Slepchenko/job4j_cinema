@@ -6,27 +6,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.User;
-import ru.job4j.cinema.service.HallService;
+import ru.job4j.cinema.service.FilmService;
+import ru.job4j.cinema.service.SimpleHallService;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @ThreadSafe
 @Controller
 @RequestMapping("/halls")
 public class HallController {
 
-    private final HallService hallService;
+    private final SimpleHallService hallService;
 
-    public HallController(HallService hallService) {
+    public HallController(SimpleHallService hallService, FilmService filmService) {
         this.hallService = hallService;
     }
 
     @GetMapping ({"/", "/{id}"})
     public String getById(Model model, @PathVariable int id,  HttpSession session) {
         checkInMenu(model, session);
-        var filmSessionOption = hallService.findById(id);
-        model.addAttribute("halls", filmSessionOption.get());
+        var hallSessionOption = hallService.findById(id);
+        model.addAttribute("hall", hallSessionOption.get().getName());
+
         return "halls/hallPresent";
     }
 
