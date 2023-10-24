@@ -19,7 +19,8 @@
         <header th:insert="blocks/header :: header"></header>
     </nav>
     <div class="container">
-        <p class="text-danger" th:text="${message}"></p>
+        <p th:text="${message}"></p>
+        <div class="col-4"><a class="btn btn-light w-100" th:href="@{/index}">Перейти в расписание</a></div>
     </div>
 </div>
 </body>

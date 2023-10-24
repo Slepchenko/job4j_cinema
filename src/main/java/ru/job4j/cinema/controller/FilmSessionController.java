@@ -34,6 +34,7 @@ public class FilmSessionController {
         checkInMenu(model, session);
         model.addAttribute("filmSessions", filmSessionService.findAll());
         model.addAttribute("halls", hallService.findAll());
+        model.addAttribute("films", filmService.findAll());
         return "sessions/list";
     }
 
@@ -41,12 +42,12 @@ public class FilmSessionController {
     public String getById(Model model, @PathVariable int id,  HttpSession session) {
         checkInMenu(model, session);
         var filmSessionOption = filmSessionService.findById(id);
-        var filmOption = filmService.findById(filmSessionOption.get().getFilmId());
-        var hallOption = hallService.findById(filmSessionOption.get().getHallId());
         if (filmSessionOption.isEmpty()) {
-            model.addAttribute("message", "Фильм не найден");
+            model.addAttribute("message", "Расписание не найдено");
             return "errors/404";
         }
+        var filmOption = filmService.findById(filmSessionOption.get().getFilmId());
+        var hallOption = hallService.findById(filmSessionOption.get().getHallId());
         model.addAttribute("filmSession", filmSessionOption.get());
         model.addAttribute("film", filmOption.get().getName());
         model.addAttribute("hall", hallOption.get().getName());
@@ -63,9 +64,7 @@ public class FilmSessionController {
 
     @PostMapping({"/create", "/{id}"})
     public String createTicket(Model model, @ModelAttribute Ticket ticket) {
-        var filmOption = filmService.findById(0);
         model.addAttribute("films", filmService.findAll());
-        model.addAttribute("move", filmOption.get());
         return "/tickets/create";
     }
 

@@ -30,21 +30,18 @@
     <div class="container">
         <img th:src="@{${poster}}" class="w-60" alt="No image"/>
         <ul>
-            <h1><b>
-                <td th:text="${film.name}">
-            </b></h1>
-            <td th:text="${genre}"></td>
+            <h1><b><td th:text="${film.name}"> </b>
+            </h1> <td th:text="${genre}"></td>
             <br>
-            <td th:text="${film.minimalAge}"></td>
-            +
+            <td th:text="${film.minimalAge}"></td> +
             <br>
-            <td th:text="${film.duration}"></td>
-            минут
+            <td th:text="${film.duration}"></td> минут
             <hr>
             <td th:text="${film.description}"></td>
             <hr>
-
+            <div class="col-4"><a class="btn btn-light w-100" th:href="@{/filmSessions}">Перейти в расписание</a></div>
         </ul>
+
     </div>
     <footer th:insert="blocks/footer :: footer"></footer>
 </div>

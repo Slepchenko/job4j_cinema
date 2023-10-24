@@ -18,14 +18,14 @@ public class FilmController {
 
     private final GenreService genreService;
 
-    private final PosterService posterService;
+    private final FileService fileService;
 
     private final FilmSessionService filmSessionService;
 
-    public FilmController(FilmService filmService, GenreService genreService, PosterService posterService, FilmSessionService filmSessionService) {
+    public FilmController(FilmService filmService, GenreService genreService, FileService fileService, FilmSessionService filmSessionService) {
         this.filmService = filmService;
         this.genreService = genreService;
-        this.posterService = posterService;
+        this.fileService = fileService;
         this.filmSessionService = filmSessionService;
     }
 
@@ -48,7 +48,7 @@ public class FilmController {
         var genreOptional = genreService.findById(filmOptional.get().getGenreId());
         model.addAttribute("film", filmOptional.get());
         model.addAttribute("genre", genreOptional.get().getName());
-        model.addAttribute("poster", posterService.getFileById(filmOptional.get().getFileId()).get().getPath());
+        model.addAttribute("poster", fileService.getFileById(filmOptional.get().getFileId()).get().getPath());
         model.addAttribute("filmSessions", filmSessionService.findAll());
         return "films/filmPage";
     }

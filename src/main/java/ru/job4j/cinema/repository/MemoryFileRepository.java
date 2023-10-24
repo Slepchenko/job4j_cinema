@@ -3,33 +3,24 @@ package ru.job4j.cinema.repository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.cinema.model.File;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class MemoryFileRepository implements FileRepository {
 
-    private final AtomicInteger nextId = new AtomicInteger(0);
-
-    private final Map<Integer, File> files = new ConcurrentHashMap<>();
-
-    @Override
-    public File save(File file) {
-        file.setId(nextId.incrementAndGet());
-        files.put(file.getId(), file);
-        return file;
-    }
+    private final Map<Integer, File> files = new HashMap<>() {
+        {
+            put(1, new File("film1", "/film1.png"));
+            put(2, new File("film2", "/film2.png"));
+            put(3, new File("film3", "/film3.png"));
+        }
+    };
 
     @Override
     public Optional<File> findById(int id) {
         return Optional.ofNullable(files.get(id));
-    }
-
-    @Override
-    public boolean deleteById(int id) {
-        return files.remove(id) != null;
     }
 
 }

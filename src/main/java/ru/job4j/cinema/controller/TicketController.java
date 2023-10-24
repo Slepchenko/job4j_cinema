@@ -1,15 +1,13 @@
 package ru.job4j.cinema.controller;
 
 import net.jcip.annotations.ThreadSafe;
+import org.postgresql.gss.GSSOutputStream;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
-import ru.job4j.cinema.service.FilmService;
-import ru.job4j.cinema.service.FilmSessionService;
-import ru.job4j.cinema.service.HallService;
-import ru.job4j.cinema.service.TicketService;
+import ru.job4j.cinema.service.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -28,20 +26,27 @@ public class TicketController {
 
     private final HallService hallService;
 
+    private final UserService userService;
 
-    public TicketController(TicketService ticketService, FilmService filmService, FilmSessionService filmSessionService, HallService hallService) {
+
+    public TicketController(TicketService ticketService, FilmService filmService, FilmSessionService filmSessionService, HallService hallService, UserService userService) {
         this.ticketService = ticketService;
         this.filmService = filmService;
         this.filmSessionService = filmSessionService;
         this.hallService = hallService;
+        this.userService = userService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public String getCreationPage(Model model, @PathVariable int id, HttpSession session) {
         checkInMenu(model, session);
         var filmSessionOption = filmSessionService.findById(id);
         var filmOption = filmService.findById(filmSessionOption.get().getFilmId());
         var hallOption = hallService.findById(filmSessionOption.get().getHallId());
+//        var userOption = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
+
+
+
         if (filmSessionOption.isEmpty()) {
             model.addAttribute("message", "Фильм не найден");
             return "errors/404";
@@ -51,6 +56,7 @@ public class TicketController {
         model.addAttribute("hall", hallOption.get().getName());
         model.addAttribute("rows", getRows(hallOption.get().getRowCount()));
         model.addAttribute("places", getPlaces(hallOption.get().getPlaceCount()));
+
         return "/tickets/create";
     }
 

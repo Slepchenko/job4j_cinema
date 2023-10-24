@@ -8,14 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.job4j.cinema.service.FileService;
 
+@ThreadSafe
 @RestController
-@RequestMapping("/files")
+@RequestMapping("/posters")
 public class FileController {
 
     private final FileService fileService;
 
-    public FileController(FileService fileService) {
-        this.fileService = fileService;
+    public FileController(FileService posterService) {
+        this.fileService = posterService;
     }
 
     @GetMapping("/{id}")
@@ -24,8 +25,7 @@ public class FileController {
         if (contentOptional.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(contentOptional.get().getContent());
+        return ResponseEntity.ok(contentOptional.get());
     }
 
 }
-
