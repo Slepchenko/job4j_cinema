@@ -32,14 +32,12 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th></th>
                     <th scope="col">Название</th>
                     <th scope="col">Жанр</th>
                     <th scope="col">Возрастные ограничения</th>
                 </tr>
                 </thead>
                 <tbody>
-                <td
                 <tr th:each="film: ${films}">
                     <td><a th:text="${film.name}" th:href="@{/films/{filmId}(filmId=${film.id})}"></a></td>
                     <td th:each="genre : ${genres}" th:if="${film.genreId == genre.id}" th:text="${genre.name}"></td>

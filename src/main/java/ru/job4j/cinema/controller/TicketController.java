@@ -66,7 +66,7 @@ public class TicketController {
             var ticketOption = ticketService.save(ticket);
             model.addAttribute("message", "Билет куплен");
             return "/tickets/buySuccessfully";
-        } catch (Exception e){
+        } catch (Exception e) {
             model.addAttribute("message", "Не удалось приобрести билет на заданное место."
                     + " Вероятно оно уже занято. Перейдите на страницу бронирования билетов и попробуйте снова.");
             return "errors/404";
