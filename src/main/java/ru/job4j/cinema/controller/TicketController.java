@@ -1,7 +1,6 @@
 package ru.job4j.cinema.controller;
 
 import net.jcip.annotations.ThreadSafe;
-import org.postgresql.gss.GSSOutputStream;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +42,6 @@ public class TicketController {
         var filmSessionOption = filmSessionService.findById(id);
         var filmOption = filmService.findById(filmSessionOption.get().getFilmId());
         var hallOption = hallService.findById(filmSessionOption.get().getHallId());
-//        var userOption = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
 
 
 

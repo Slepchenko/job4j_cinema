@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.Ticket;
-import ru.job4j.cinema.model.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,7 +50,6 @@ class Sql2oTicketRepositoryTest {
         Optional<Ticket> findTicket = sql2oTicketRepository.findById(saveTicket.get().getId());
         assertThat(findTicket).usingRecursiveComparison().isEqualTo(saveTicket);
     }
-
 
     @Test
     public void whenDontSaveThenNothingFound() {
