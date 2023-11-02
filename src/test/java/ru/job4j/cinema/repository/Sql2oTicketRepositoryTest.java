@@ -6,12 +6,10 @@ import org.junit.jupiter.api.Test;
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.Ticket;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
 import static java.util.Collections.emptyList;
-import static java.util.Optional.empty;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class Sql2oTicketRepositoryTest {
