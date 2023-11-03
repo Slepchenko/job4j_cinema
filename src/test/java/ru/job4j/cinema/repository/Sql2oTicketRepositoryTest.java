@@ -3,7 +3,6 @@ package ru.job4j.cinema.repository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.Ticket;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -68,10 +67,10 @@ class Sql2oTicketRepositoryTest {
     }
 
     @Test
-    public void whenSaveTicketSuchExistThenFalse() throws Exception {
-        Optional<Ticket> ticket1 = sql2oTicketRepository.save(new Ticket(0, 1, 1, 1, 1));
+    public void whenSaveTicketSuchExistThenFalse() {
+        sql2oTicketRepository.save(new Ticket(0, 1, 1, 1, 1));
         AtomicReference<Optional<Ticket>> ticket2 = null;
-        Exception exception = assertThrows(Exception.class, () -> ticket2.set(sql2oTicketRepository.save(new Ticket(0, 1, 1, 1, 2))));
+        assertThrows(Exception.class, () -> ticket2.set(sql2oTicketRepository.save(new Ticket(0, 1, 1, 1, 2))));
     }
 
 }
